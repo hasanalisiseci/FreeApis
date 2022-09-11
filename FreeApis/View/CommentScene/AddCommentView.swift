@@ -22,11 +22,12 @@ struct AddCommentView: View {
             TextField("Comment...", text: $comment)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
-                .frame(width: UIScreen.screenWidth, height: 100, alignment: .center)
+                .frame(width: UIScreen.screenWidth, height: 40, alignment: .center)
                 .font(.title2)
                 .multilineTextAlignment(.leading)
         }
         .frame(width: UIScreen.screenWidth)
+        .padding(20)
     }
 }
 

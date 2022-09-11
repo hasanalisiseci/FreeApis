@@ -17,7 +17,7 @@ struct CommentCell: View {
                 Spacer()
             }
             Text(model.comment)
-                .font(.system(size: 18))              .multilineTextAlignment(.leading)
+                .font(.system(size: 18)).multilineTextAlignment(.leading)
         }
         .padding()
         .frame(width: UIScreen.screenWidth)
@@ -26,6 +26,6 @@ struct CommentCell: View {
 
 struct CommentCell_Previews: PreviewProvider {
     static var previews: some View {
-        CommentCell(model: CommentModel.commentModelDummy)
+        CommentCell(model: SingleCommentModel.commentModelDummy)
     }
 }

@@ -8,14 +8,12 @@
 import Foundation
 
 // MARK: - FreeApis
-
 struct FreeApiModel: Codable {
     let count: Int
     let entries: [Entry]
 }
 
 // MARK: - Entry
-
 struct Entry: Codable, Hashable {
     let api, entryDescription: String
     let auth: Auth
@@ -54,6 +52,7 @@ enum Cors: String, Codable {
     }
 }
 
+// MARK: Dummy Data
 extension Entry {
     static let dummyEntry = Entry(api: "Biriyani As A Service", entryDescription: "Provides detailed character and guild rankings for Raiding and Mythic+ content in World of Warcraft", auth: Auth.empty, https: true, cors: Cors.unknown, link: "https://raider.io/api", category: "Cloud Storage & File Sharing")
 }

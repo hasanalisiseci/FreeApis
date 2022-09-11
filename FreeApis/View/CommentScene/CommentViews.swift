@@ -17,26 +17,33 @@ struct CommentViews: View {
 
     var body: some View {
         VStack {
-            CommentViewHeaderView(model: model)
+            CommentHeaderView(model: model)
             Section {
                 Text("Let's!, share with people what you are curious about this service or any creative ideas you have about this service.").bold().padding()
             }
             if viewModel.commentListIsCompleted ?? false {
-                List(viewModel.commentList ?? [], id: \.self) { comment in
-                    CommentCell(model: comment)
-                        .swipeActions {
-                            Button {
-                                if comment.userId == username.toAsciiCode() {
-                                    viewModel.deleteComment(timestamp: comment.timestamp, documentName: viewModel.clearName(name: model.api))
-                                } else {
-                                    viewModel.reportComment(singleComment: ReportCommentModel(userId: comment.userId, userName: comment.userName, timestamp: comment.timestamp, comment: comment.comment, documentName: model.api))
-                                    showingAlert = true
+                if (viewModel.commentList == []) {
+                    Section {
+                        Text("No comments yet...")
+                    }
+                    Spacer()
+                } else {
+                    List(viewModel.commentList ?? [], id: \.self) { comment in
+                        CommentCell(model: comment)
+                            .swipeActions {
+                                Button {
+                                    if comment.userId == username.toAsciiCode() {
+                                        viewModel.deleteComment(timestamp: comment.timestamp, documentName: viewModel.clearName(name: model.api))
+                                    } else {
+                                        viewModel.reportComment(singleComment: ReportCommentModel(userId: comment.userId, userName: comment.userName, timestamp: comment.timestamp, comment: comment.comment, documentName: model.api))
+                                        showingAlert = true
+                                    }
+                                } label: {
+                                    Text(comment.userId == username.toAsciiCode() ? "Delete" : "Report")
                                 }
-                            } label: {
-                                Text(comment.userId == username.toAsciiCode() ? "Delete" : "Report")
+                                .tint(comment.userId == username.toAsciiCode() ? .red : .blue)
                             }
-                            .tint(comment.userId == username.toAsciiCode() ? .red : .blue)
-                        }
+                    }
                 }
             } else {
                 ProgressView()
@@ -64,6 +71,8 @@ struct CommentViews: View {
         .alert("Comment is reported!", isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("")
     }
 }
 

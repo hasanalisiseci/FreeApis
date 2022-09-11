@@ -9,9 +9,9 @@ import Foundation
 
 extension StringProtocol {
     var asciiValues: [UInt8] { compactMap(\.asciiValue) }
-    
-    func toAsciiCode() -> String{
-        let asciArray = self.asciiValues
+
+    func toAsciiCode() -> String {
+        let asciArray = asciiValues
         var str = ""
         for value in asciArray {
             str += "\(value)"
@@ -19,4 +19,3 @@ extension StringProtocol {
         return str
     }
 }
-

@@ -14,41 +14,39 @@ struct ApiListView: View {
     @State private var selection = "All"
 
     var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVStack {
-                    if viewModel.apiListIsCompleted ?? false {
-                        if selection == "All" {
-                            ForEach(viewModel.apiList!.entries, id: \.self) { model in
+        ScrollView {
+            LazyVStack {
+                if viewModel.apiListIsCompleted ?? false {
+                    if selection == "All" {
+                        ForEach(viewModel.apiList!.entries, id: \.self) { model in
+                            NavigationLink(destination: CommentViews(model: model)) {
+                                ListItemView(model: model)
+                            }
+                        }
+                    } else {
+                        ForEach(viewModel.apiList!.entries, id: \.self) { model in
+                            if model.category == selection {
                                 NavigationLink(destination: CommentViews(model: model)) {
                                     ListItemView(model: model)
                                 }
                             }
-                        } else {
-                            ForEach(viewModel.apiList!.entries, id: \.self) { model in
-                                if model.category == selection {
-                                    NavigationLink(destination: CommentViews(model: model)) {
-                                        ListItemView(model: model)
-                                    }
-                                }
-                            }
                         }
-                    } else {
-                        ProgressView()
                     }
+                } else {
+                    ProgressView()
                 }
             }
-            .navigationTitle("Free Api List")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Picker("Select Category", selection: $selection) {
-                        ForEach(viewModel.categoryList, id: \.self) { category in
-                            Text(category)
-                                .bold().font(.title)
-                        }
+        }
+        .navigationTitle("Free Api List")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Picker("Select Category", selection: $selection) {
+                    ForEach(viewModel.categoryList, id: \.self) { category in
+                        Text(category)
+                            .bold().font(.title)
                     }
-                    .pickerStyle(.menu)
                 }
+                .pickerStyle(.menu)
             }
         }
     }

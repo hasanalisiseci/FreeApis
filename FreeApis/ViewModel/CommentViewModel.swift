@@ -49,7 +49,7 @@ class CommentViewModel: ObservableObject {
             if let snapshot = snapshot?.documents {
                 for doc in snapshot {
                     // Do delete
-                    docRef.document(doc.documentID).delete() { err in
+                    docRef.document(doc.documentID).delete { err in
                         if let err = err {
                             print("Error updating document: \(err)")
                         } else {
@@ -61,17 +61,16 @@ class CommentViewModel: ObservableObject {
             }
         }
     }
-    
+
     func reportComment(singleComment: ReportCommentModel) {
         let docRef = db.collection("reports").document()
-        
+
         do {
             try docRef.setData(from: singleComment)
         } catch let error {
             print("Error writing report comment to Firestore: \(error)")
         }
     }
-
 
     func clearName(name: String) -> String {
         var returnStr = ""
@@ -82,7 +81,7 @@ class CommentViewModel: ObservableObject {
     }
 }
 
-//docRef.document(doc.documentID).updateData([
+// docRef.document(doc.documentID).updateData([
 //    "userName": FieldValue.delete(),
 //    "userId": FieldValue.delete(),
 //    "timestamp": FieldValue.delete(),

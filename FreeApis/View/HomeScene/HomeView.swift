@@ -9,7 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        ApiListView()
+        NavigationView {
+            ApiListView()
+        }.navigationViewStyle(.stack)
     }
 }
 

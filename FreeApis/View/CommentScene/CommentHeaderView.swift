@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CommentViewHeaderView: View {
+struct CommentHeaderView: View {
     /// Api item model
     let model: Entry
 
@@ -29,23 +29,17 @@ struct CommentViewHeaderView: View {
                 Text(model.entryDescription)
                     .font(.body)
             }
-            .padding(30)
+            .padding(.horizontal, 30)
+            .padding(.bottom, 10)
             .foregroundColor(.white)
             .frame(width: UIScreen.screenWidth)
             .background(Color.blue)
-        }
-//        .contextMenu {
-//            Link(destination: URL(string: model.link) ?? URL(string: "https://api.publicapis.org/")!) {
-//                Text("Open Link")
-//                Image(systemName: "link.circle.fill")
-//                    .font(.largeTitle)
-//            }
-//        }
+        }.padding(.top, -20)
     }
 }
 
 struct CommentViewHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentViewHeaderView(model: Entry.dummyEntry)
+        CommentHeaderView(model: Entry.dummyEntry)
     }
 }

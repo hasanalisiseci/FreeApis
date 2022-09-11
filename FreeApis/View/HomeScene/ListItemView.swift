@@ -18,6 +18,7 @@ struct ListItemView: View {
                     Text(model.api.uppercased())
                         .font(.title)
                         .bold()
+                        .multilineTextAlignment(.leading)
                     Rectangle().frame(width: 50, height: 2)
                 }
                 Spacer()
