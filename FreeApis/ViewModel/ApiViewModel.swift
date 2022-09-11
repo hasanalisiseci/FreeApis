@@ -37,24 +37,6 @@ class ApiViewModel: ObservableObject {
         }
     }
 
-    func createComments() {
-        guard let list = apiList?.entries else {
-            return
-        }
-        for api in list {
-            db.collection("comments").document(clearName(name: api.api)).setData([
-                "comments": [],
-
-            ]) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
-                }
-            }
-        }
-    }
-
     func clearName(name: String) -> String {
         var returnStr = ""
         returnStr = name.replacingOccurrences(of: "\\", with: "", options: NSString.CompareOptions.literal, range: nil)

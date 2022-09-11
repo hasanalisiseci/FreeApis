@@ -50,12 +50,6 @@ struct ApiListView: View {
                     .pickerStyle(.menu)
                 }
             }
-        }.onAppear {
-//            print("onappear")
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                print("createcomments")
-//                viewModel.createComments()
-//            }
         }
     }
 }
